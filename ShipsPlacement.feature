@@ -3,7 +3,7 @@
 	As a sea battle game engine
 	I want to create all ships and put them on map
 
-Scenario: 
+Scenario: Ship creation at origin
 	Given I have a sea battle map
 	And the map is empty
 	When I put a ship at origin

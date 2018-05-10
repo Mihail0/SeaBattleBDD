@@ -10,6 +10,7 @@ namespace SeaBattleBDD
     {
         static void Main(string[] args)
         {
+
         }
     }
 }

@@ -21,5 +21,17 @@ namespace SeaBattleBDD
             //todo refactor this code
             map[0, 0] = Globals.SHIP;
         }
+
+        /// <summary>
+        /// Puts the shot at the target location.
+        /// </summary>
+        /// <param name="map">Map where the shot will be placed</param>
+        /// <param name="x">Position along the x-axis</param>
+        /// <param name="y">Position along the y-axis</param>
+        public void putShot(bool[,] map, byte x, byte y)
+        {
+            //todo refactor this code
+            map[0, 0] = Globals.SHOT;
+        }
     }
 }

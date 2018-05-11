@@ -11,5 +11,6 @@ namespace SeaBattleBDD
         public const byte MAPSIZE = 10;
         public const bool EMPTY = false;
         public const bool SHIP = true;
+        public const bool SHOT = true;
     }
 }

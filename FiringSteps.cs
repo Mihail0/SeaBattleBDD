@@ -1,33 +1,54 @@
 ﻿using System;
 using TechTalk.SpecFlow;
+using NUnit.Framework;
 
 namespace SeaBattleBDD
 {
     [Binding]
     public class FiringSteps
     {
+        private bool[,] actualMap;
+        private bool[,] expectMap;
+        private GameEngine gameEngine = new GameEngine();
+
         [Given(@"I have a map of shots")]
         public void GivenIHaveAMapOfShots()
         {
-            ScenarioContext.Current.Pending();
+            actualMap = new bool[Globals.MAPSIZE, Globals.MAPSIZE];
         }
         
         [Given(@"the map of shots is empty")]
         public void GivenTheMapOfShotsIsEmpty()
         {
-            ScenarioContext.Current.Pending();
+            actualMap = new bool[Globals.MAPSIZE, Globals.MAPSIZE];
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    actualMap[i, j] = Globals.EMPTY;
+                }
+            }
         }
         
         [When(@"I'm shooting at origin")]
         public void WhenIMShootingAtOrigin()
         {
-            ScenarioContext.Current.Pending();
+            gameEngine.putShot(actualMap, 0, 0);
         }
         
         [Then(@"map of shots should contains one shot at origin")]
         public void ThenMapOfShotsShouldContainsOneShotAtOrigin()
         {
-            ScenarioContext.Current.Pending();
+            expectMap = new bool[Globals.MAPSIZE, Globals.MAPSIZE];
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    expectMap[i, j] = Globals.EMPTY;
+                }
+            }
+            expectMap[0, 0] = Globals.SHOT;
+            Assert.AreEqual(expectMap, actualMap);
         }
     }
 }

@@ -33,5 +33,40 @@ namespace SeaBattleBDD
             //todo refactor this code
             map[0, 0] = Globals.SHOT;
         }
+
+        /// <summary>
+        /// Builds the result map that player can see.
+        /// </summary>
+        /// <param name="shipsMap">Map that contains all ships</param>
+        /// <param name="shotsMap">Map that contains all shots</param>
+        /// <returns>Result map</returns>
+        public char[,] makeResult(bool[,] shipsMap, bool[,] shotsMap)
+        {
+            //todo refactor this code
+            char[,] result = new char[Globals.MAPSIZE, Globals.MAPSIZE];
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    result[i, j] = Globals.WATER;
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Prints the result map.
+        /// </summary>
+        /// <param name="result">Result map</param>
+        public void print(char[,] result)
+        {
+            for (byte i = 0; i < Globals.MAPSIZE; i++) {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    Console.Write(result[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }

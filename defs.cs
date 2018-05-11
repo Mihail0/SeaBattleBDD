@@ -12,5 +12,7 @@ namespace SeaBattleBDD
         public const bool EMPTY = false;
         public const bool SHIP = true;
         public const bool SHOT = true;
+
+        public const char WATER = '*';
     }
 }

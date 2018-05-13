@@ -19,7 +19,7 @@ namespace SeaBattleBDD
         public void putShip(bool[,] map, byte x, byte y)
         {
             //todo refactor this code
-            map[0, 0] = Globals.SHIP;
+            map[x, y] = Globals.SHIP;
         }
 
         /// <summary>

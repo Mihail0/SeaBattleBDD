@@ -31,7 +31,7 @@ namespace SeaBattleBDD
         public void putShot(bool[,] map, byte x, byte y)
         {
             //todo refactor this code
-            map[0, 0] = Globals.SHOT;
+            map[x, y] = Globals.SHOT;
         }
 
         /// <summary>

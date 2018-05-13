@@ -50,5 +50,17 @@ namespace SeaBattleBDD
             expectMap[0, 0] = Globals.SHOT;
             Assert.AreEqual(expectMap, actualMap);
         }
+
+        [When(@"I'm shooting at random point")]
+        public void WhenIMShootingAtRandomPoint()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"map of shots should contains one shot at target point")]
+        public void ThenMapOfShotsShouldContainsOneShotAtTargetPoint()
+        {
+            ScenarioContext.Current.Pending();
+        }
     }
 }

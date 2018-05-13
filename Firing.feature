@@ -8,3 +8,9 @@ Scenario: Firing at origin of empty map
 	And the map of shots is empty
 	When I'm shooting at origin
 	Then map of shots should contains one shot at origin
+
+Scenario: Firing at random point of empty map
+	Given I have a map of shots
+	And the map of shots is empty
+	When I'm shooting at random point
+	Then map of shots should contains one shot at target point

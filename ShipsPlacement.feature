@@ -8,3 +8,9 @@ Scenario: Ship creation at origin
 	And the map is empty
 	When I put a ship at origin
 	Then map should contains one ship at origin
+
+Scenario: Ship creation at random point
+	Given I have a sea battle map
+	And the map is empty
+	When I put a ship at random point
+	Then map should contains one ship at random point

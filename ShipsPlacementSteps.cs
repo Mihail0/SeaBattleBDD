@@ -7,6 +7,8 @@ namespace SeaBattleBDD
     [Binding]
     public class ShipsPlacementSteps
     {
+        private byte X = 0;
+        private byte Y = 0;
         private bool[,] actualMap;
         private bool[,] expectMap;
         private GameEngine gameEngine = new GameEngine();
@@ -54,13 +56,24 @@ namespace SeaBattleBDD
         [When(@"I put a ship at random point")]
         public void WhenIPutAShipAtRandomPoint()
         {
-            ScenarioContext.Current.Pending();
+            X = Globals.getRandom(0, 10);
+            Y = Globals.getRandom(0, 10);
+            gameEngine.putShip(actualMap, X, Y);
         }
 
         [Then(@"map should contains one ship at random point")]
         public void ThenMapShouldContainsOneShipAtRandomPoint()
         {
-            ScenarioContext.Current.Pending();
+            expectMap = new bool[Globals.MAPSIZE, Globals.MAPSIZE];
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    expectMap[i, j] = Globals.EMPTY;
+                }
+            }
+            expectMap[X, Y] = Globals.SHIP;
+            Assert.AreEqual(expectMap, actualMap);
         }
     }
 }

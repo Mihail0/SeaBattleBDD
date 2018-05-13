@@ -11,3 +11,12 @@ Scenario: Printing at the beginning
 	When I make the result map
 	And I print the result map
 	Then the output should be all water
+
+Scenario: Printing after one shot
+	Given I have a ships map
+	And ships map is empty
+	And I have a shots map
+	And shots map contains one shot at random point
+	When I make the result map
+	And I print the result map
+	Then the output should be all water except target point that should be miss 

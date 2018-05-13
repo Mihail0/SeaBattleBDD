@@ -80,5 +80,17 @@ namespace SeaBattleBDD
             }
             Assert.AreEqual(expectResulMap, actualResulMap);
         }
+
+        [Given(@"shots map contains one shot at random point")]
+        public void GivenShotsMapContainsOneShotAtRandomPoint()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"the output should be all water except target point that should be miss")]
+        public void ThenTheOutputShouldBeAllWaterExceptTargetPointThatShouldBeMiss()
+        {
+            ScenarioContext.Current.Pending();
+        }
     }
 }

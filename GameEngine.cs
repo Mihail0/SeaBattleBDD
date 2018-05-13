@@ -48,7 +48,15 @@ namespace SeaBattleBDD
             {
                 for (byte j = 0; j < Globals.MAPSIZE; j++)
                 {
-                    result[i, j] = Globals.WATER;
+                    switch (shotsMap[i, j])
+                    {
+                        case Globals.EMPTY:
+                            result[i, j] = Globals.WATER;
+                            break;
+                        case Globals.SHOT:
+                            result[i, j] = Globals.MISS;
+                            break;
+                    }
                 }
             }
             return result;

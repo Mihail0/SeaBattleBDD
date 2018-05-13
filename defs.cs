@@ -16,6 +16,7 @@ namespace SeaBattleBDD
         public const bool SHOT = true;
 
         public const char WATER = '*';
+        public const char MISS = 'O';
 
         public static byte getRandom(byte min, byte max)
         {

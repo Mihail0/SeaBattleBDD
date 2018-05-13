@@ -7,6 +7,9 @@ namespace SeaBattleBDD
     [Binding]
     public class PrintingSteps
     {
+        private byte X = 0;
+        private byte Y = 0;
+
         private bool[,] actualShipsMap;
         private bool[,] actualShotsMap;
         private char[,] actualResulMap;
@@ -84,13 +87,32 @@ namespace SeaBattleBDD
         [Given(@"shots map contains one shot at random point")]
         public void GivenShotsMapContainsOneShotAtRandomPoint()
         {
-            ScenarioContext.Current.Pending();
+            actualShotsMap = new bool[Globals.MAPSIZE, Globals.MAPSIZE];
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    actualShotsMap[i, j] = Globals.EMPTY;
+                }
+            }
+            X = Globals.getRandom(0, 10);
+            Y = Globals.getRandom(0, 10);
+            actualShotsMap[X, Y] = Globals.SHOT;
         }
 
         [Then(@"the output should be all water except target point that should be miss")]
         public void ThenTheOutputShouldBeAllWaterExceptTargetPointThatShouldBeMiss()
         {
-            ScenarioContext.Current.Pending();
+            expectResulMap = new char[Globals.MAPSIZE, Globals.MAPSIZE];
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    expectResulMap[i, j] = Globals.WATER;
+                }
+            }
+            expectResulMap[X, Y] = Globals.MISS;
+            Assert.AreEqual(expectResulMap, actualResulMap);
         }
     }
 }

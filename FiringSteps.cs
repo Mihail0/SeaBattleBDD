@@ -7,6 +7,8 @@ namespace SeaBattleBDD
     [Binding]
     public class FiringSteps
     {
+        private byte X = 0;
+        private byte Y = 0;
         private bool[,] actualMap;
         private bool[,] expectMap;
         private GameEngine gameEngine = new GameEngine();
@@ -54,13 +56,24 @@ namespace SeaBattleBDD
         [When(@"I'm shooting at random point")]
         public void WhenIMShootingAtRandomPoint()
         {
-            ScenarioContext.Current.Pending();
+            X = Globals.getRandom(0, 10);
+            Y = Globals.getRandom(0, 10);
+            gameEngine.putShot(actualMap, X, Y);
         }
 
         [Then(@"map of shots should contains one shot at target point")]
         public void ThenMapOfShotsShouldContainsOneShotAtTargetPoint()
         {
-            ScenarioContext.Current.Pending();
+            expectMap = new bool[Globals.MAPSIZE, Globals.MAPSIZE];
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    expectMap[i, j] = Globals.EMPTY;
+                }
+            }
+            expectMap[X, Y] = Globals.SHOT;
+            Assert.AreEqual(expectMap, actualMap);
         }
     }
 }

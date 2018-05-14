@@ -20,3 +20,12 @@ Scenario: Printing after one shot
 	When I make the result map
 	And I print the result map
 	Then the output should be all water except target point that should be miss 
+
+Scenario: Printing whole map
+	Given I have a ships map
+	And ships map contains one big ship at random point
+	And I have a shots map
+	And shots map all opened
+	When I make the result map
+	And I print the result map
+	Then the output should be similar to ships map

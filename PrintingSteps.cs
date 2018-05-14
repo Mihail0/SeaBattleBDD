@@ -114,5 +114,23 @@ namespace SeaBattleBDD
             expectResulMap[X, Y] = Globals.MISS;
             Assert.AreEqual(expectResulMap, actualResulMap);
         }
+
+        [Given(@"ships map contains one big ship at random point")]
+        public void GivenShipsMapContainsOneBigShipAtRandomPoint()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Given(@"shots map all opened")]
+        public void GivenShotsMapAllOpened()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"the output should be similar to ships map")]
+        public void ThenTheOutputShouldBeSimilarToShipsMap()
+        {
+            ScenarioContext.Current.Pending();
+        }
     }
 }

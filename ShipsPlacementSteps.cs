@@ -75,5 +75,17 @@ namespace SeaBattleBDD
             expectMap[X, Y] = Globals.SHIP;
             Assert.AreEqual(expectMap, actualMap);
         }
+
+        [When(@"I put a big ship at random point")]
+        public void WhenIPutABigShipAtRandomPoint()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"map should contains one big ship at random point")]
+        public void ThenMapShouldContainsOneBigShipAtRandomPoint()
+        {
+            ScenarioContext.Current.Pending();
+        }
     }
 }

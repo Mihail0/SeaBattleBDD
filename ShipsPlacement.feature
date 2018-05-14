@@ -14,3 +14,9 @@ Scenario: Ship creation at random point
 	And the map is empty
 	When I put a ship at random point
 	Then map should contains one ship at random point
+
+Scenario: Big ship creation at random point
+	Given I have a sea battle map
+	And the map is empty
+	When I put a big ship at random point
+	Then map should contains one big ship at random point

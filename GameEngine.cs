@@ -23,6 +23,26 @@ namespace SeaBattleBDD
         }
 
         /// <summary>
+        /// Puts the ship at the target location.
+        /// </summary>
+        /// <param name="map">Map where the ship will be placed</param>
+        /// <param name="x">Position along the x-axis</param>
+        /// <param name="y">Position along the y-axis</param>
+        /// <param name="length">Length of the ship</param>
+        /// <param name="direction">Direction of the ship</param>
+        public void putShip(bool[,] map, byte x, byte y, byte length, bool direction)
+        {
+            //todo add exception handler
+            byte _X = x;
+            byte _Y = y;
+            for (byte i = 0; i < length; i++)
+            {
+                map[_X, _Y] = Globals.SHIP;
+                if (!direction) _X++; else _Y++;
+            }
+        }
+
+        /// <summary>
         /// Puts the shot at the target location.
         /// </summary>
         /// <param name="map">Map where the shot will be placed</param>

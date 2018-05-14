@@ -62,7 +62,6 @@ namespace SeaBattleBDD
         /// <returns>Result map</returns>
         public char[,] makeResult(bool[,] shipsMap, bool[,] shotsMap)
         {
-            //todo refactor this code
             char[,] result = new char[Globals.MAPSIZE, Globals.MAPSIZE];
             for (byte i = 0; i < Globals.MAPSIZE; i++)
             {
@@ -74,7 +73,10 @@ namespace SeaBattleBDD
                             result[i, j] = Globals.WATER;
                             break;
                         case Globals.SHOT:
-                            result[i, j] = Globals.MISS;
+                            if (!shipsMap[i, j])
+                                result[i, j] = Globals.MISS;
+                            else
+                                result[i, j] = Globals.DEAD;
                             break;
                     }
                 }

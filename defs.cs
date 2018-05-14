@@ -19,6 +19,7 @@ namespace SeaBattleBDD
 
         public const char WATER = '*';
         public const char MISS = 'O';
+        public const char DEAD = 'X';
 
         public static byte getRandom(byte min, byte max)
         {

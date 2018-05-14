@@ -9,6 +9,8 @@ namespace SeaBattleBDD
     {
         private byte X = 0;
         private byte Y = 0;
+        private byte L = 0;
+        private bool D = Globals.HRZT;
 
         private bool[,] actualShipsMap;
         private bool[,] actualShotsMap;
@@ -118,19 +120,41 @@ namespace SeaBattleBDD
         [Given(@"ships map contains one big ship at random point")]
         public void GivenShipsMapContainsOneBigShipAtRandomPoint()
         {
-            ScenarioContext.Current.Pending();
+            X = Globals.getRandom(0, 10);
+            Y = Globals.getRandom(0, 10);
+            D = Convert.ToBoolean(Globals.getRandom(0, 2));
+            byte Z = 0; if (!D) Z = X; else Z = Y;
+            L = Globals.getRandom(1, Convert.ToByte(11 - Z));
+            gameEngine.putShip(actualShipsMap, X, Y, L, D);
         }
 
         [Given(@"shots map all opened")]
         public void GivenShotsMapAllOpened()
         {
-            ScenarioContext.Current.Pending();
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    actualShotsMap[i, j] = Globals.SHOT;
+                }
+            }
         }
 
         [Then(@"the output should be similar to ships map")]
         public void ThenTheOutputShouldBeSimilarToShipsMap()
         {
-            ScenarioContext.Current.Pending();
+            expectResulMap = new char[Globals.MAPSIZE, Globals.MAPSIZE];
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    if (!actualShipsMap[i, j])
+                        expectResulMap[i, j] = Globals.MISS;
+                    else
+                        expectResulMap[i, j] = Globals.DEAD;
+                }
+            }
+            Assert.AreEqual(expectResulMap, actualResulMap);
         }
     }
 }

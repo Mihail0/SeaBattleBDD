@@ -9,6 +9,8 @@ namespace SeaBattleBDD
     {
         private byte X = 0;
         private byte Y = 0;
+        private byte L = 0;
+        private bool D = Globals.HRZT;
         private bool[,] actualMap;
         private bool[,] expectMap;
         private GameEngine gameEngine = new GameEngine();
@@ -79,13 +81,33 @@ namespace SeaBattleBDD
         [When(@"I put a big ship at random point")]
         public void WhenIPutABigShipAtRandomPoint()
         {
-            ScenarioContext.Current.Pending();
+            X = Globals.getRandom(0, 10);
+            Y = Globals.getRandom(0, 10);
+            D = Convert.ToBoolean(Globals.getRandom(0, 2));
+            byte Z = 0; if (!D) Z = X; else Z = Y;
+            L = Globals.getRandom(1, Convert.ToByte(11 - Z));
+            gameEngine.putShip(actualMap, X, Y, L, D);
         }
 
         [Then(@"map should contains one big ship at random point")]
         public void ThenMapShouldContainsOneBigShipAtRandomPoint()
         {
-            ScenarioContext.Current.Pending();
+            expectMap = new bool[Globals.MAPSIZE, Globals.MAPSIZE];
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    expectMap[i, j] = Globals.EMPTY;
+                }
+            }
+            byte _X = X;
+            byte _Y = Y;
+            for (byte i = 0; i < L; i++)
+            {
+                expectMap[_X, _Y] = Globals.SHIP;
+                if (!D) _X++; else _Y++;
+            }
+            Assert.AreEqual(expectMap, actualMap);
         }
     }
 }

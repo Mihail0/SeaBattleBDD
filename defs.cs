@@ -14,6 +14,8 @@ namespace SeaBattleBDD
         public const bool EMPTY = false;
         public const bool SHIP = true;
         public const bool SHOT = true;
+        public const bool HRZT = false;
+        public const bool VERT = true;
 
         public const char WATER = '*';
         public const char MISS = 'O';

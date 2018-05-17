@@ -50,8 +50,73 @@ namespace SeaBattleBDD
         /// <param name="y">Position along the y-axis</param>
         public void putShot(bool[,] map, byte x, byte y)
         {
-            //todo refactor this code
+            //outdated method
             map[x, y] = Globals.SHOT;
+        }
+
+        /// <summary>
+        /// Puts the shot at the target location and explodes area if needed.
+        /// </summary>
+        /// <param name="shotsMap">Map where the shot will be placed</param>
+        /// <param name="shipsMap">Map contains all ships</param>
+        /// <param name="x">Position along the x-axis</param>
+        /// <param name="y">Position along the y-axis</param>
+        /// <returns>Result code</returns>
+        public byte putShot(bool[,] shotsMap, bool[,] shipsMap, byte x, byte y)
+        {
+            //todo add exception handler
+            if (shotsMap[x, y] == Globals.SHOT) return Globals.REZMISS;
+            shotsMap[x, y] = Globals.SHOT;
+            //No ships found
+            if (shipsMap[x, y] != Globals.SHIP) return Globals.REZMISS;
+            byte X = x;
+            byte Y = y;
+            //Moving to top left corner of the ship
+            while (true)
+            {
+                if (X == 0) break;
+                if (shipsMap[X - 1, Y] != Globals.SHIP) break;
+                X--;
+            }
+            while (true)
+            {
+                if (Y == 0) break;
+                if (shipsMap[X, Y - 1] != Globals.SHIP) break;
+                Y--;
+            }
+            bool direction = Globals.HRZT;
+            if (Y < Globals.MAPSIZE - 1)
+                if (shipsMap[X, Y + 1] == Globals.SHIP) direction = Globals.VERT;
+            byte Z = 0;
+            if (!direction) Z = X; else Z = Y;
+            bool explosion = true;
+            while (true)
+            {
+                if ((!direction) && (!(X + 1 < Globals.MAPSIZE))) break;
+                if (direction && (!(Y + 1 < Globals.MAPSIZE))) break;
+                if (shipsMap[X, Y] != Globals.SHIP) break;
+                if (shotsMap[X, Y] != Globals.SHOT) explosion = false;
+                if (!direction) X++; else Y++;
+            }
+            if (explosion)
+            {
+                if (!direction)
+                {
+                    for (byte i = Z; i < X; i++)
+                    {
+                        explode(shotsMap, Z, Y);
+                    }
+                }
+                else
+                {
+                    for (byte i = Z; i < Y; i++)
+                    {
+                        explode(shotsMap, X, Z);
+                    }
+                }
+                return Globals.REZKILL;
+            }
+            return Globals.REZHIT;
         }
 
         /// <summary>

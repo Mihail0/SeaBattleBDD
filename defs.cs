@@ -18,6 +18,10 @@ namespace SeaBattleBDD
         public const bool HRZT = false;
         public const bool VERT = true;
 
+        public const byte REZMISS = 0;
+        public const byte REZHIT = 1;
+        public const byte REZKILL = 2;
+
         public const char WATER = '*';
         public const char MISS = 'O';
         public const char DEAD = 'X';

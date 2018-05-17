@@ -11,6 +11,7 @@ namespace SeaBattleBDD
         private static readonly Random random = new Random();
 
         public const byte MAPSIZE = 10;
+        public const byte EXPLOSIONRADIUS = 1;
         public const bool EMPTY = false;
         public const bool SHIP = true;
         public const bool SHOT = true;

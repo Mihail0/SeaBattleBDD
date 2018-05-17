@@ -11,6 +11,7 @@ namespace SeaBattleBDD
         private byte Y = 0;
         private bool[,] actualMap;
         private bool[,] expectMap;
+        private bool[,] actualShipsMap;
         private GameEngine gameEngine = new GameEngine();
 
         [Given(@"I have a map of shots")]
@@ -56,14 +57,13 @@ namespace SeaBattleBDD
         [Given(@"I have a random point")]
         public void GivenIHaveARandomPoint()
         {
-            ScenarioContext.Current.Pending();
+            X = Globals.getRandom(0, 10);
+            Y = Globals.getRandom(0, 10);
         }
 
         [When(@"I'm shooting at random point")]
         public void WhenIMShootingAtRandomPoint()
         {
-            X = Globals.getRandom(0, 10);
-            Y = Globals.getRandom(0, 10);
             gameEngine.putShot(actualMap, X, Y);
         }
 
@@ -85,19 +85,62 @@ namespace SeaBattleBDD
         [Given(@"ships map contains single ship at the random point")]
         public void GivenShipsMapContainsSingleShipAtTheRandomPoint()
         {
-            ScenarioContext.Current.Pending();
+            actualShipsMap = new bool[Globals.MAPSIZE, Globals.MAPSIZE];
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    actualShipsMap[i, j] = Globals.EMPTY;
+                }
+            }
+            actualShipsMap[X, Y] = Globals.SHIP;
         }
 
         [When(@"I'm shooting at the random point via new function")]
         public void WhenIMShootingAtTheRandomPointViaNewFunction()
         {
-            ScenarioContext.Current.Pending();
+            gameEngine.putShot(actualMap, actualShipsMap, X, Y);
         }
 
         [Then(@"map of shots should contains explosion around the target")]
         public void ThenMapOfShotsShouldContainsExplosionAroundTheTarget()
         {
-            ScenarioContext.Current.Pending();
+            expectMap = new bool[Globals.MAPSIZE, Globals.MAPSIZE];
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                for (byte j = 0; j < Globals.MAPSIZE; j++)
+                {
+                    expectMap[i, j] = Globals.EMPTY;
+                }
+            }
+            byte _X = 0;
+            byte _Y = 0;
+            if (Globals.EXPLOSIONRADIUS > X)
+                _X = 0;
+            else
+                _X = Convert.ToByte(X - Globals.EXPLOSIONRADIUS);
+            if (Globals.EXPLOSIONRADIUS > Y)
+                _Y = 0;
+            else
+                _Y = Convert.ToByte(Y - Globals.EXPLOSIONRADIUS);
+            byte X_ = 0;
+            byte Y_ = 0;
+            if (X + Globals.EXPLOSIONRADIUS < Globals.MAPSIZE)
+                X_ = Convert.ToByte(X + Globals.EXPLOSIONRADIUS);
+            else
+                X_ = Globals.MAPSIZE - 1;
+            if (Y + Globals.EXPLOSIONRADIUS < Globals.MAPSIZE)
+                Y_ = Convert.ToByte(Y + Globals.EXPLOSIONRADIUS);
+            else
+                Y_ = Globals.MAPSIZE - 1;
+            for (byte i = _X; i < X_; i++)
+            {
+                for (byte j = _Y; j < Y_; j++)
+                {
+                    expectMap[i, j] = Globals.SHOT;
+                }
+            }
+            Assert.AreEqual(expectMap, actualMap);
         }
     }
 }

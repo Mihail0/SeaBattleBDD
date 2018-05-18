@@ -192,9 +192,20 @@ namespace SeaBattleBDD
         /// <param name="result">Result map</param>
         public void print(char[,] result)
         {
-            for (byte i = 0; i < Globals.MAPSIZE; i++) {
+            Console.Write("  ");
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                Console.Write(" ");
+                Console.Write(i);
+            }
+            Console.WriteLine();
+            for (byte i = 0; i < Globals.MAPSIZE; i++)
+            {
+                Console.Write(" ");
+                Console.Write(i);
                 for (byte j = 0; j < Globals.MAPSIZE; j++)
                 {
+                    Console.Write(" ");
                     Console.Write(result[i, j]);
                 }
                 Console.WriteLine();

@@ -43,6 +43,43 @@ namespace SeaBattleBDD
         }
 
         /// <summary>
+        /// Explodes area around the target point.
+        /// </summary>
+        /// <param name="map">Map contains all shots</param>
+        /// <param name="x">Position along the x-axis</param>
+        /// <param name="y">Position along the y-axis</param>
+        protected void explode(bool[,] map, byte x, byte y)
+        {
+            byte _X = 0;
+            byte _Y = 0;
+            if (Globals.EXPLOSIONRADIUS > x)
+                _X = 0;
+            else
+                _X = Convert.ToByte(x - Globals.EXPLOSIONRADIUS);
+            if (Globals.EXPLOSIONRADIUS > y)
+                _Y = 0;
+            else
+                _Y = Convert.ToByte(y - Globals.EXPLOSIONRADIUS);
+            byte X_ = 0;
+            byte Y_ = 0;
+            if (x + Globals.EXPLOSIONRADIUS < Globals.MAPSIZE)
+                X_ = Convert.ToByte(x + Globals.EXPLOSIONRADIUS);
+            else
+                X_ = Globals.MAPSIZE - 1;
+            if (y + Globals.EXPLOSIONRADIUS < Globals.MAPSIZE)
+                Y_ = Convert.ToByte(y + Globals.EXPLOSIONRADIUS);
+            else
+                Y_ = Globals.MAPSIZE - 1;
+            for (byte i = _X; i < X_; i++)
+            {
+                for (byte j = _Y; j < Y_; j++)
+                {
+                    map[i, j] = Globals.SHOT;
+                }
+            }
+        }
+
+        /// <summary>
         /// Puts the shot at the target location.
         /// </summary>
         /// <param name="map">Map where the shot will be placed</param>

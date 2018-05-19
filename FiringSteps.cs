@@ -133,9 +133,9 @@ namespace SeaBattleBDD
                 Y_ = Convert.ToByte(Y + Globals.EXPLOSIONRADIUS);
             else
                 Y_ = Globals.MAPSIZE - 1;
-            for (byte i = _X; i < X_; i++)
+            for (byte i = _X; i <= X_; i++)
             {
-                for (byte j = _Y; j < Y_; j++)
+                for (byte j = _Y; j <= Y_; j++)
                 {
                     expectMap[i, j] = Globals.SHOT;
                 }

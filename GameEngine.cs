@@ -70,9 +70,9 @@ namespace SeaBattleBDD
                 Y_ = Convert.ToByte(y + Globals.EXPLOSIONRADIUS);
             else
                 Y_ = Globals.MAPSIZE - 1;
-            for (byte i = _X; i < X_; i++)
+            for (byte i = _X; i <= X_; i++)
             {
-                for (byte j = _Y; j < Y_; j++)
+                for (byte j = _Y; j <= Y_; j++)
                 {
                     map[i, j] = Globals.SHOT;
                 }
@@ -129,26 +129,35 @@ namespace SeaBattleBDD
             bool explosion = true;
             while (true)
             {
-                if ((!direction) && (!(X + 1 < Globals.MAPSIZE))) break;
-                if (direction && (!(Y + 1 < Globals.MAPSIZE))) break;
-                if (shipsMap[X, Y] != Globals.SHIP) break;
-                if (shotsMap[X, Y] != Globals.SHOT) explosion = false;
-                if (!direction) X++; else Y++;
+                if (!direction)
+                {
+                    if (!(X + 1 < Globals.MAPSIZE)) break;
+                    if (shipsMap[X + 1, Y] != Globals.SHIP) break;
+                    if (shotsMap[X + 1, Y] != Globals.SHOT) explosion = false;
+                    X++;
+                }
+                else
+                {
+                    if (!(Y + 1 < Globals.MAPSIZE)) break;
+                    if (shipsMap[X, Y + 1] != Globals.SHIP) break;
+                    if (shotsMap[X, Y + 1] != Globals.SHOT) explosion = false;
+                    Y++;
+                }
             }
             if (explosion)
             {
                 if (!direction)
                 {
-                    for (byte i = Z; i < X; i++)
+                    for (byte i = Z; i <= X; i++)
                     {
-                        explode(shotsMap, Z, Y);
+                        explode(shotsMap, i, Y);
                     }
                 }
                 else
                 {
-                    for (byte i = Z; i < Y; i++)
+                    for (byte i = Z; i <= Y; i++)
                     {
-                        explode(shotsMap, X, Z);
+                        explode(shotsMap, X, i);
                     }
                 }
                 return Globals.REZKILL;

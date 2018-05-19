@@ -30,7 +30,12 @@ namespace SeaBattleBDD
             }
             byte attempts = 0;
             byte gamestate = 0;
-            byte shipscount = 0;
+            byte shipscount = 5;
+            gameEngine.putShip(shipsMap, 5, 2, 1, Globals.HRZT);
+            gameEngine.putShip(shipsMap, 9, 0, 4, Globals.VERT);
+            gameEngine.putShip(shipsMap, 2, 5, 3, Globals.VERT);
+            gameEngine.putShip(shipsMap, 6, 6, 2, Globals.HRZT);
+            gameEngine.putShip(shipsMap, 4, 8, 5, Globals.HRZT);
             string message = "The game is on!";
             do {
                 Console.Clear();
